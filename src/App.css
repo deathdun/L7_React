@@ -1,0 +1,386 @@
+/* Основные стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+/* Хедер */
+.header {
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #333;
+}
+
+.header h1 {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+}
+
+/* Контейнер */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Фильтры */
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.filter-btn {
+  padding: 10px 24px;
+  border: 1px solid #444;
+  background: #1e1e1e;
+  color: #b0b0b0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.filter-btn:hover {
+  border-color: #666;
+  color: #ffffff;
+}
+
+.filter-btn.active {
+  background: #2d2d2d;
+  color: #ffffff;
+  border-color: #666;
+}
+
+/* Кнопка добавления */
+.add-task-section {
+  margin-bottom: 24px;
+}
+
+.add-btn {
+  background: #2d2d2d;
+  color: #ffffff;
+  border: 1px solid #444;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.add-btn:hover {
+  background: #3d3d3d;
+  border-color: #666;
+}
+
+/* Таблица */
+.table-container {
+  background: #1e1e1e;
+  border-radius: 4px;
+  border: 1px solid #333;
+  overflow: hidden;
+}
+
+.tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tasks-table th {
+  background: #252525;
+  padding: 18px 20px;
+  text-align: left;
+  font-weight: 500;
+  color: #b0b0b0;
+  border-bottom: 1px solid #333;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tasks-table td {
+  padding: 20px;
+  border-bottom: 1px solid #2d2d2d;
+  font-size: 14px;
+  color: #d0d0d0;
+  vertical-align: top;
+}
+
+.tasks-table tr:last-child td {
+  border-bottom: none;
+}
+
+.tasks-table tr:hover {
+  background-color: #252525;
+}
+
+/* Ячейки для редактирования */
+.editable-cell {
+  cursor: pointer;
+  position: relative;
+  min-height: 24px;
+}
+
+.editable-cell:hover {
+  background-color: #2a2a2a;
+}
+
+.editable-cell input,
+.editable-cell textarea,
+.editable-cell select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #444;
+  background: #2d2d2d;
+  color: #ffffff;
+  border-radius: 2px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+.editable-cell input:focus,
+.editable-cell textarea:focus,
+.editable-cell select:focus {
+  border-color: #666;
+}
+
+.editable-cell textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Бейджи статусов */
+.status-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 2px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-активная-задача {
+  background: #2d3a2d;
+  color: #8bc38a;
+}
+
+.status-задача-выполнена {
+  background: #2d3a3a;
+  color: #8bc3c3;
+}
+
+.status-задача-отменена {
+  background: #3a2d2d;
+  color: #c38a8a;
+}
+
+/* Кнопка удаления */
+.delete-btn {
+  background: transparent;
+  color: #666;
+  border: 1px solid #444;
+  padding: 8px 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.delete-btn:hover {
+  color: #ff6b6b;
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
+  padding: 60px 20px !important;
+  font-style: italic;
+}
+
+/* Попап */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.popup {
+  background: #1e1e1e;
+  border-radius: 2px;
+  width: 520px;
+  max-width: 90%;
+  border: 1px solid #333;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #333;
+}
+
+.popup-header h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.close-btn:hover {
+  color: #ffffff;
+  background: #2d2d2d;
+}
+
+.popup-body {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #b0b0b0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #444;
+  background: #2d2d2d;
+  color: #ffffff;
+  border-radius: 2px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.popup-footer {
+  padding: 24px;
+  border-top: 1px solid #333;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancel-btn {
+  padding: 12px 24px;
+  border: 1px solid #444;
+  background: transparent;
+  color: #b0b0b0;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cancel-btn:hover {
+  color: #ffffff;
+  border-color: #666;
+}
+
+.create-btn {
+  padding: 12px 24px;
+  background: #2d2d2d;
+  color: #ffffff;
+  border: 1px solid #444;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.create-btn:hover {
+  background: #3d3d3d;
+  border-color: #666;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .app {
+    padding: 16px;
+  }
+  
+  .filters {
+    flex-direction: column;
+  }
+  
+  .tasks-table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .tasks-table th,
+  .tasks-table td {
+    padding: 16px 12px;
+  }
+  
+  .popup {
+    width: 95%;
+    margin: 16px;
+  }
+}
