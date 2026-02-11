@@ -1,4 +1,3 @@
-/* Основные стили */
 * {
   margin: 0;
   padding: 0;
@@ -16,7 +15,6 @@ body {
   padding: 24px;
 }
 
-/* Хедер */
 .header {
   margin-bottom: 32px;
   padding-bottom: 16px;
@@ -30,13 +28,11 @@ body {
   letter-spacing: -0.5px;
 }
 
-/* Контейнер */
 .container {
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* Фильтры */
 .filters {
   display: flex;
   gap: 12px;
@@ -68,7 +64,7 @@ body {
   border-color: #666;
 }
 
-/* Кнопка добавления */
+
 .add-task-section {
   margin-bottom: 24px;
 }
@@ -92,7 +88,6 @@ body {
   border-color: #666;
 }
 
-/* Таблица */
 .table-container {
   background: #1e1e1e;
   border-radius: 4px;
@@ -133,7 +128,6 @@ body {
   background-color: #252525;
 }
 
-/* Ячейки для редактирования */
 .editable-cell {
   cursor: pointer;
   position: relative;
@@ -169,7 +163,6 @@ body {
   resize: vertical;
 }
 
-/* Бейджи статусов */
 .status-badge {
   display: inline-block;
   padding: 6px 14px;
@@ -195,7 +188,6 @@ body {
   color: #c38a8a;
 }
 
-/* Кнопка удаления */
 .delete-btn {
   background: transparent;
   color: #666;
@@ -359,7 +351,6 @@ body {
   border-color: #666;
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
   .app {
     padding: 16px;
@@ -382,5 +373,163 @@ body {
   .popup {
     width: 95%;
     margin: 16px;
+  }
+}
+
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.task-counter {
+  background: #2d2d2d;
+  color: #b0b0b0;
+  padding: 6px 16px;
+  border-radius: 2px;
+  font-size: 14px;
+  border: 1px solid #444;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clear-all-btn {
+  background: transparent;
+  color: #666;
+  border: 1px solid #444;
+  padding: 6px 16px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clear-all-btn:hover {
+  color: #ff6b6b;
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+}
+
+.storage-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8bc38a;
+  font-size: 13px;
+  padding: 8px 0;
+  border-top: 1px solid #333;
+  margin-top: 12px;
+  padding-top: 16px;
+}
+
+@keyframes savePulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.saving-indicator {
+  animation: savePulse 1.5s ease-in-out infinite;
+  color: #8bc38a;
+}
+
+.filter-btn {
+  position: relative;
+}
+
+.filter-btn span {
+  margin-left: 8px;
+  font-size: 12px;
+  color: #888;
+}
+
+.filter-btn.active span {
+  color: #ffffff;
+}
+
+.save-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 12px;
+  padding: 4px 12px;
+  background: #1e1e1e;
+  border: 1px solid #444;
+  border-radius: 2px;
+  font-size: 12px;
+  color: #8bc38a;
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
+  padding: 80px 20px !important;
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.empty-message::before {
+  content: '📋';
+  display: block;
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.delete-btn::before {
+  content: '🗑️';
+  font-size: 14px;
+}
+
+.popup-save-hint {
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #1e1e1e;
+  border-left: 3px solid #8bc38a;
+  font-size: 12px;
+  color: #b0b0b0;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .storage-info {
+    font-size: 12px;
+  }
+  
+  .delete-btn {
+    padding: 8px 12px;
+  }
+  
+  .delete-btn::before {
+    margin-right: 4px;
   }
 }
