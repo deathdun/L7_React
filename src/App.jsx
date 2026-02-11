@@ -2,8 +2,11 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './App.css';
 
 const TaskManager = () => {
-  // Состояния
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('todo-tasks');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+  
   const [filter, setFilter] = useState('all');
   const [showPopup, setShowPopup] = useState(false);
   const [editingTaskId, setEditingTaskId] = useState(null);
@@ -16,11 +19,13 @@ const TaskManager = () => {
     status: 'Активная задача'
   });
 
-  // Константы
   const STATUS_OPTIONS = ['Активная задача', 'Задача выполнена', 'Задача отменена'];
   const editInputRef = useRef(null);
 
-  // Фильтрация задач
+  useEffect(() => {
+    localStorage.setItem('todo-tasks', JSON.stringify(tasks));
+  }, [tasks]);
+
   const filteredTasks = useCallback(() => {
     if (filter === 'active') {
       return tasks.filter(task => task.status === 'Активная задача');
@@ -31,7 +36,6 @@ const TaskManager = () => {
     return tasks;
   }, [tasks, filter]);
 
-  // Обработчики
   const handleAddTask = () => {
     const { title, description, executor, deadline } = newTask;
     
@@ -66,7 +70,7 @@ const TaskManager = () => {
   };
 
   const handleSaveEdit = (taskId, field, value) => {
-    if (!value.trim()) {
+    if (!value.trim() && field !== 'deadline') {
       alert('Поле не может быть пустым');
       return;
     }
@@ -97,11 +101,17 @@ const TaskManager = () => {
   };
 
   const formatDate = (dateString) => {
+    if (!dateString) return 'Не указано';
     const date = new Date(dateString);
     return date.toLocaleDateString('ru-RU');
   };
 
-  // Рендеринг ячейки
+  const handleClearAllTasks = () => {
+    if (window.confirm('Вы уверены, что хотите удалить все задачи?')) {
+      setTasks([]);
+    }
+  };
+
   const renderEditableCell = (task, field, content) => {
     const isEditing = editingTaskId === task.id && editingField === field;
     
@@ -141,7 +151,6 @@ const TaskManager = () => {
     }
   };
 
-  // Рендеринг таблицы
   const renderTable = () => {
     const tasksToShow = filteredTasks();
     
@@ -149,7 +158,7 @@ const TaskManager = () => {
       return (
         <tr>
           <td colSpan="6" className="empty-message">
-            Нет задач для отображения
+            {tasks.length === 0 ? 'Нет задач. Создайте первую задачу!' : 'Нет задач по выбранному фильтру'}
           </td>
         </tr>
       );
@@ -190,7 +199,23 @@ const TaskManager = () => {
   return (
     <div className="app">
       <header className="header">
-        <h1>Управление задачами</h1>
+        <div className="header-content">
+          <h1>Управление задачами</h1>
+          <div className="header-actions">
+            <span className="task-counter">
+              {tasks.length} {tasks.length === 1 ? 'задача' : 
+                tasks.length > 1 && tasks.length < 5 ? 'задачи' : 'задач'}
+            </span>
+            {tasks.length > 0 && (
+              <button className="clear-all-btn" onClick={handleClearAllTasks}>
+                Очистить все
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="storage-info">
+          Данные автоматически сохраняются в браузере
+        </div>
       </header>
 
       <div className="container">
@@ -201,9 +226,9 @@ const TaskManager = () => {
               className={`filter-btn ${filter === type ? 'active' : ''}`}
               onClick={() => setFilter(type)}
             >
-              {type === 'all' && 'Все задачи'}
-              {type === 'active' && 'Активные'}
-              {type === 'completed' && 'Завершенные'}
+              {type === 'all' && `Все задачи (${tasks.length})`}
+              {type === 'active' && `Активные (${tasks.filter(t => t.status === 'Активная задача').length})`}
+              {type === 'completed' && `Завершенные (${tasks.filter(t => ['Задача выполнена', 'Задача отменена'].includes(t.status)).length})`}
             </button>
           ))}
         </div>
